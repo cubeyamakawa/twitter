@@ -1,0 +1,64 @@
+<div class='container'>
+  <div class="row">
+    <div class="col-xs-4 left-content">
+      <% if logged_in? %>
+        <%= link_to current_user.name, current_user %>
+        <div class='text'>
+          つぶやき
+        </div>
+        <div class="num">
+          <%= link_to current_user.tweets.count, user_path(current_user) %>
+        </div>
+        <div class="follow-num">
+          <div class="text">
+          フォロー
+          </div>
+          <div class="num">
+          0
+          </div>
+          <div class="text">
+          フォロワー
+          </div>
+          <div class="num">
+            0
+          </div>
+          <div class="text">
+          お気に入り
+          </div>
+          <div class="num">
+            <%= link_to current_user.favorites.count, favorites_user_path(current_user) %>
+          </div>
+        </div>
+        <%= form_for @tweet do |f| %>
+          <div class="form-group">
+            <%= f.text_area :content, class: "form-control" %>
+          </div>
+          <%= f.submit "つぶやく", class: "btn btn-success" %>
+        <% end %>
+      <% end %>
+    </div>
+    <div class="col-xs-8 right-content">
+      <% @tweets.each do |t|%>
+        <div class="list-group-item">
+          <h4 class="user">
+            <div class="user-name">
+              <%= link_to t.user.name, user_path(t.user)%>
+            </div>
+          </h4>
+          <div class="tweet-content">
+            <p>
+              <%= t.content %>
+            </p>
+            <div class="footer">
+              <% if t.favorited_by? current_user %>
+                <%= link_to "お気に入りを解除", tweet_favorites_path(t), method: :delete %>
+              <% else %>
+                <%= link_to "お気に入りに登録", tweet_favorites_path(t), method: :post %>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

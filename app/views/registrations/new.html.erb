@@ -1,0 +1,24 @@
+<h1>Twitter</h1>
+<div class="center-block" >
+    <%= form_for @user, url: registrations_path, method: :post do |f| %>
+      <h2>会員登録する</h2>
+      <div class="form-group">
+          <%= f.label :name,'ユーザー名', class: "control-label" %>
+          <%= f.text_field :name, class:"form-control"%>
+      </div>
+      <div class="form-group">
+          <%= f.label :email,"メールアドレス", class: "control-label" %>
+          <%= f.text_field :email, class:"form-control" %>
+      </div>
+      <div class="form-group">
+          <%= f.label :password,"パスワード", class: "control-label" %>
+          <%= f.password_field :password, class:"form-control" %>
+      </div>
+      <div class="form-group">
+          <%= f.label :password_confirmation,"確認用パスワード", class: "control-label" %>
+          <%= f.password_field :password_confirmation, class:"form-control" %>
+      </div>
+          <%= f.submit '登録する', class: "btn btn-primary"%>
+          <%= link_to 'ログインする',new_sessions_path, class: "loginpull-right" %>
+    <% end %>
+</div>

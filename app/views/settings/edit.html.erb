@@ -1,0 +1,13 @@
+<h1>Settings#edit</h1>
+<p>Find me in app/views/settings/edit.html.erb</p>
+
+
+<%= form_for @user, url: settings_path, method: :put do |f| %>
+  <%= f.label :name %>
+  <%= f.text_field :name %>
+  <%= f.label :displayname %>
+  <%= f.text_field :displayname %>
+  <%= f.label :prof %>
+  <%= f.text_area :prof %>
+  <%= f.submit %>
+<% end %>

@@ -1,0 +1,18 @@
+<div class="col-xs-8#users-content">
+  <div class="list-group">
+    <div class="list-group-item user-list">
+      <h2>ユーザー一覧</h2>
+    </div>
+    <% @users.each do |u|%>
+      <h4 class="user">
+        <span class="user-name">
+          <%= link_to u.name, user_path(u)%>
+        </span>
+      </h4>
+    <% end %>
+  </div>
+</div>
+
+
+
+
