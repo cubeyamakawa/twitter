@@ -1,0 +1,5 @@
+<% @follows.each do |f|%>
+  <% if f.reverse_follower_id == @user.id %>
+    <%= @users.find_by(id: f.follower_id).name %>
+  <% end %>
+<% end %>

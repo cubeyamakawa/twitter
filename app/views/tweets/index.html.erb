@@ -2,7 +2,12 @@
   <div class="row">
     <div class="col-xs-4 left-content">
       <% if logged_in? %>
-        <%= link_to current_user.name, current_user %>
+        <p>
+          <%= link_to current_user.name, current_user %>
+        </p>
+        <p>
+          <%= current_user.prof %>
+        </p>
         <div class='text'>
           つぶやき
         </div>
@@ -14,13 +19,13 @@
           フォロー
           </div>
           <div class="num">
-          0
+            <%= link_to current_user.follows.count, follows_user_path(current_user) %>
           </div>
           <div class="text">
           フォロワー
           </div>
           <div class="num">
-            0
+            <%= link_to current_user.followers.count, followers_user_path(current_user) %>
           </div>
           <div class="text">
           お気に入り
@@ -54,6 +59,11 @@
                 <%= link_to "お気に入りを解除", tweet_favorites_path(t), method: :delete %>
               <% else %>
                 <%= link_to "お気に入りに登録", tweet_favorites_path(t), method: :post %>
+              <% end %>
+              <% if t.user.followed_by? current_user %>
+                <%= link_to "フォロー解除", user_follows_path(t.user), method: :delete %>
+              <% else %>
+                <%= link_to "フォローする", user_follows_path(t.user), method: :post %>
               <% end %>
             </div>
           </div>

@@ -1,0 +1,3 @@
+<% @user.follows.each do |f|%>
+  <%= link_to @users.find_by(id: f.reverse_follower_id).name, user_path(f.reverse_follower_id) %>
+<% end %>
