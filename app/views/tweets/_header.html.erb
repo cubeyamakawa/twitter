@@ -1,0 +1,38 @@
+<div class="navbar">
+  <ul class="nav nav-tabs nav-justified">
+    <% if logged_in? %>
+        <li>
+          <div class='text'>
+            ツイート
+          </div>
+          <div class="num">
+            <%= link_to @user.tweets.count, user_path(@user) %>
+          </div>
+        </li>
+        <li>
+          <div class="text">
+          フォロー
+          </div>
+          <div class="num">
+            <%= link_to @user.follows.count, follows_user_path(@user) %>
+          </div>
+        </li>
+        <li>
+          <div class="text">
+          フォロワー
+          </div>
+          <div class="num">
+            <%= link_to @user.followers.count, followers_user_path(@user) %>
+          </div>
+        </li>
+        <li>
+          <div class="text">
+          いいね
+          </div>
+          <div class="num">
+            <%= link_to @user.favorites.count, favorites_user_path(@user) %>
+          </div>
+        </li>
+    <% end %>
+  </ul>
+</div>

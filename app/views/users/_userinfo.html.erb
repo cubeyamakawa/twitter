@@ -1,0 +1,9 @@
+
+<% if logged_in? %>
+  <p>
+    <%= link_to "@"+@user.name, @user %>
+  </p>
+  <p>
+    <%= @user.prof %>
+  </p>
+<% end %>

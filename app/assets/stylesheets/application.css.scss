@@ -15,7 +15,25 @@
  */
 @import "bootstrap";
 
-body {
-background: rgb(245,248,250);
-font-family: Meiryo;
+body{
+	height: 100%;
+	width: 100%;
+	background: rgb(245,248,250);
+	font-family: Meiryo;
+}
+.navbar {
+background-color: rgb(255,255,255);
+border-color: rgb(225,232,237);
+}
+
+
+.nav.nav-tabs{
+	.text{
+		text-align: center;
+		font-size: 13px;
+	}
+	.num{
+		text-align: center;
+		font-size: 24px;
+	}
 }

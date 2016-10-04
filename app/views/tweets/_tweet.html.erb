@@ -1,0 +1,28 @@
+<% @tweets.each do |t|%>
+  <div class="list-group-item">
+    <h4 class="user">
+      <div class="user-name">
+        <%= link_to t.user.name, user_path(t.user)%>
+      </div>
+    </h4>
+    <div class="tweet-content">
+      <p>
+        <%= t.content %>
+      </p>
+      <div class="footer">
+        <% if t.favorited_by? current_user %>
+          <%= link_to "お気に入りを解除", tweet_favorites_path(t), method: :delete %>
+        <% else %>
+          <%= link_to "お気に入りに登録", tweet_favorites_path(t), method: :post %>
+        <% end %>
+        <% if t.user.id != current_user.id %> 
+          <% if t.user.followed_by? current_user %>
+            <%= link_to "フォロー解除", user_follows_path(t.user), method: :delete %>
+          <% else %>
+            <%= link_to "フォローする", user_follows_path(t.user), method: :post %>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+<% end %>

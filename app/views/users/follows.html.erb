@@ -1,3 +1,22 @@
-<% @user.follows.each do |f|%>
-  <%= link_to @users.find_by(id: f.reverse_follower_id).name, user_path(f.reverse_follower_id) %>
-<% end %>
+<div class='container'>
+  <div class="row">
+    <div class="col-xs-4 left-content">
+      <%= render "users/userinfo" %>
+    </div>
+    <div class="col-xs-8 right-content">
+      <%= render "tweets/header" %>
+      <% @user.follows.each do |f|%>
+        <div class="list-group-item">
+          <h4>
+            <span>
+            <%= link_to @users.find_by(id: f.reverse_follower_id).name, user_path(f.reverse_follower_id) %>
+            </span>
+            <span>
+              <%= "@"+@users.find_by(id: f.reverse_follower_id).name %>
+            </span>
+            </h4>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

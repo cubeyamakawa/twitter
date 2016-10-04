@@ -1,5 +1,24 @@
-<% @follows.each do |f|%>
-  <% if f.reverse_follower_id == @user.id %>
-    <%= @users.find_by(id: f.follower_id).name %>
-  <% end %>
-<% end %>
+<div class='container'>
+  <div class="row">
+    <div class="col-xs-4 left-content">
+      <%= render "users/userinfo" %>
+    </div>
+    <div class="col-xs-8 right-content">
+      <%= render "tweets/header" %>
+  	  <% @follows.each do |f|%>
+        <% if f.reverse_follower_id == @user.id %>
+          <div class="list-group-item">
+            <h4 class="user">
+              <span class="user-name">
+                <%= link_to @users.find_by(id: f.follower_id).name, user_path(@users.find_by(id: f.follower_id)) %>
+              </span>
+              <span>
+                <%= "@"+@users.find_by(id: f.follower_id).name %>
+              </span>
+            </h4>
+          </div>
+  		  <% end %>
+  	  <% end %>
+    </div>
+  </div>
+</div>

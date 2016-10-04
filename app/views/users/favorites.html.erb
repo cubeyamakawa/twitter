@@ -1,18 +1,26 @@
-<div class="col-xs-8">
-  <div class="list-group">
-    <% @user.favorites.each do |t|%>
-        <div class="list-group-item">
-          <h4 class="user">
-            <div class="user-name">
-              <%= link_to @tweets.find_by(id: t.tweet_id).user.name, user_path(@tweets.find_by(id: t.tweet_id).user)%>
+<div class='container'>
+  <div class="row">
+    <div class="col-xs-4 left-content">
+      <%= render "users/userinfo" %>
+    </div>
+    <div class="col-xs-8 right-content">
+      <%= render "tweets/header" %>
+      <div class="list-group">
+        <% @user.favorites.each do |t|%>
+            <div class="list-group-item">
+              <h4 class="user">
+                <div class="user-name">
+                  <%= link_to @tweets.find_by(id: t.tweet_id).user.name, user_path(@tweets.find_by(id: t.tweet_id).user)%>
+                </div>
+              </h4>
+              <div class="tweet-content">
+                <p>
+                  <%= @tweets.find_by(id: t.tweet_id).content %>
+                </p>
+              </div>
             </div>
-          </h4>
-          <div class="tweet-content">
-            <p>
-              <%= @tweets.find_by(id: t.tweet_id).content %>
-            </p>
-          </div>
-        </div>
-      <% end %>
+          <% end %>
+      </div>
+    </div>
   </div>
 </div>

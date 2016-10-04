@@ -1,74 +1,62 @@
+
 <div class='container'>
   <div class="row">
     <div class="col-xs-4 left-content">
-      <% if logged_in? %>
-        <p>
-          <%= link_to current_user.name, current_user %>
-        </p>
-        <p>
-          <%= current_user.prof %>
-        </p>
-        <div class='text'>
-          つぶやき
+    <% if logged_in? %>
+      <p>
+        <%= link_to "@"+current_user.name, current_user %>
+      </p>
+      <p>
+        <%= current_user.prof %>
+      </p>
+    <% end %>
+      <%= form_for @tweet do |f| %>
+        <div class="form-group">
+          <%= f.text_area :content, class: "form-control" %>
         </div>
-        <div class="num">
-          <%= link_to current_user.tweets.count, user_path(current_user) %>
-        </div>
-        <div class="follow-num">
-          <div class="text">
-          フォロー
-          </div>
-          <div class="num">
-            <%= link_to current_user.follows.count, follows_user_path(current_user) %>
-          </div>
-          <div class="text">
-          フォロワー
-          </div>
-          <div class="num">
-            <%= link_to current_user.followers.count, followers_user_path(current_user) %>
-          </div>
-          <div class="text">
-          お気に入り
-          </div>
-          <div class="num">
-            <%= link_to current_user.favorites.count, favorites_user_path(current_user) %>
-          </div>
-        </div>
-        <%= form_for @tweet do |f| %>
-          <div class="form-group">
-            <%= f.text_area :content, class: "form-control" %>
-          </div>
-          <%= f.submit "つぶやく", class: "btn btn-success" %>
-        <% end %>
+        <%= f.submit "つぶやく", class: "btn btn-success" %>
       <% end %>
     </div>
     <div class="col-xs-8 right-content">
-      <% @tweets.each do |t|%>
-        <div class="list-group-item">
-          <h4 class="user">
-            <div class="user-name">
-              <%= link_to t.user.name, user_path(t.user)%>
-            </div>
-          </h4>
-          <div class="tweet-content">
-            <p>
-              <%= t.content %>
-            </p>
-            <div class="footer">
-              <% if t.favorited_by? current_user %>
-                <%= link_to "お気に入りを解除", tweet_favorites_path(t), method: :delete %>
-              <% else %>
-                <%= link_to "お気に入りに登録", tweet_favorites_path(t), method: :post %>
-              <% end %>
-              <% if t.user.followed_by? current_user %>
-                <%= link_to "フォロー解除", user_follows_path(t.user), method: :delete %>
-              <% else %>
-                <%= link_to "フォローする", user_follows_path(t.user), method: :post %>
-              <% end %>
-            </div>
-          </div>
-        </div>
-      <% end %>
+      <div class="navbar">
+        <ul class="nav nav-tabs nav-justified">
+          <% if logged_in? %>
+              <li>
+                <div class='text'>
+                  ツイート
+                </div>
+                <div class="num">
+                  <%= link_to current_user.tweets.count, user_path(current_user) %>
+                </div>
+              </li>
+              <li>
+                <div class="text">
+                フォロー
+                </div>
+                <div class="num">
+                  <%= link_to current_user.follows.count, follows_user_path(current_user) %>
+                </div>
+              </li>
+              <li>
+                <div class="text">
+                フォロワー
+                </div>
+                <div class="num">
+                  <%= link_to current_user.followers.count, followers_user_path(current_user) %>
+                </div>
+              </li>
+              <li>
+                <div class="text">
+                いいね
+                </div>
+                <div class="num">
+                  <%= link_to current_user.favorites.count, favorites_user_path(current_user) %>
+                </div>
+              </li>
+          <% end %>
+        </ul>
+      </div>
+      <%= render "tweets/tweet" %>
     </div>
   </div>
 </div>

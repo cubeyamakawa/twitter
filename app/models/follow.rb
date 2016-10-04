@@ -5,4 +5,5 @@ class Follow < ApplicationRecord
 	validates :follower, presence: true
 	validates :reverse_follower, presence: true
 	validates :reverse_follower_id, uniqueness: {scope: :follower_id}
+	validates :reverse_follower_id, follower_id: false
 end
